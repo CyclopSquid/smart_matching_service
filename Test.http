@@ -1,0 +1,32 @@
+### Сбалансированная стратегия (по умолчанию)
+POST http://localhost:8080/match?strategy=balanced
+Content-Type: application/json
+
+{
+  "district": "Центральный",
+  "maxBudget": 5000,
+  "requiredServices": ["Вакцинация", "Стрижка"],
+  "preferredRating": 4.5
+}
+
+### Сначала дешевле
+POST http://localhost:8080/match?strategy=cheapest
+Content-Type: application/json
+
+{
+  "district": "Центральный",
+  "maxBudget": 5000,
+  "requiredServices": ["Вакцинация"],
+  "preferredRating": 4.0
+}
+
+### Сначала лучший рейтинг
+POST http://localhost:8080/match?strategy=rating
+Content-Type: application/json
+
+{
+  "district": "Центральный",
+  "maxBudget": 5000,
+  "requiredServices": ["Вакцинация"],
+  "preferredRating": 4.0
+}
