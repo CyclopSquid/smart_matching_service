@@ -25,8 +25,9 @@
 - `BalancedStrategy` — по рейтингу соответствия (по умолчанию)
 - `BestRatingStrategy` — сначала центры с лучшим рейтингом
 - `CheapestFirstStrategy` — сначала дешевле
+- `ClosestFirstStrategy` — сначала ближе
 
-### РасчётScore
+### Расчёт Score
 | Критерий | Баллы |
 |----------|-------|
 | Район совпадает | +30 |
@@ -34,6 +35,22 @@
 | Есть нужная услуга | +40 |
 | Рейтинг >= предпочтительного | +5 |
 | **Максимум** | **100** |
+
+## Структура проекта
+
+```
+src/main/kotlin/com/mamonov/
+├── model/              — data-классы (DTO)
+├── specification/      — фильтрация (Specification паттерн)
+├── strategy/           — сортировка (Strategy паттерн)
+├── scoring/            — подсчёт баллов
+├── service/            — основная логика и тестовые данные
+├── factory/            — фабрика стратегий
+├── Application.kt      — точка входа
+├── Routing.kt          — HTTP маршруты
+├── Serialization.kt    — настройка JSON
+└── Monitoring.kt       — логирование запросов
+```
 
 ## Запуск
 
@@ -69,6 +86,7 @@ Content-Type: application/json
 | `balanced` | По рейтингу соответствия (по умолчанию) |
 | `cheapest` | Сначала дешевле |
 | `rating` | Сначала лучший рейтинг |
+| `closest` | Сначала ближе |
 
 ### Ответ
 ```json
@@ -84,6 +102,11 @@ Content-Type: application/json
 ```bash
 ./gradlew test
 ```
+
+Покрыты:
+- `MatchingService` — фильтрация и сортировка
+- `ScoreCalculator` — подсчёт баллов
+- `DistrictSpecification`, `BudgetSpecification`, `ServiceSpecification` — фильтры
 
 ## Примечание об архитектуре
 
