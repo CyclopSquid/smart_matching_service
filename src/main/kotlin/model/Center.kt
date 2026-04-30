@@ -9,5 +9,6 @@ data class Center(
     val district: String,
     val pricePerDay: Int,
     val services: List<String>,
-    val rating: Double
+    val rating: Double,
+    val distanceKm: Double = 0.0
 )
